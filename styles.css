@@ -147,19 +147,15 @@ body {
 
 @media (max-width: 600px) {
   .grid {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 88%;
-    grid-template-columns: none;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding-bottom: 10px;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
   }
-  .card { scroll-snap-align: start; }
+  .card { 
+    width: 100%;
+    min-height: 180px;
+  }
 }
 
 .card {
@@ -312,6 +308,7 @@ body {
     white-space: nowrap;
   }
   .carousel-controls { display: none; }
+  .content-head { display: none; }
 }
 
 
