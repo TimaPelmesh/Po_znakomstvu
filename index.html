@@ -32,18 +32,22 @@
 
       <section class="daily container">
         <div class="daily-head">
-          <h2 class="section-title">Сегодняшняя подборка</h2>
+          <h2 class="section-title">Темы дня</h2>
           <div class="daily-meta" id="daily-date"></div>
         </div>
         <div class="layout">
           <aside class="sidebar" aria-labelledby="topics-title">
             <h2 id="topics-title" class="section-title">Темы</h2>
             <div class="daily-button-wrap">
-              <a class="topic-link topic-daily" href="/">Сегодняшняя подборка</a>
+              <a class="topic-link topic-daily" href="/">Темы дня</a>
             </div>
             <div id="topics" class="topics-list topics-vertical"></div>
           </aside>
           <div class="content">
+            <div class="content-head">
+              <h2 class="section-title">Темы дня</h2>
+              <div class="daily-meta" id="daily-date-content"></div>
+            </div>
             <div class="carousel-controls" aria-hidden="true">
               <button class="ctrl" id="carousel-prev" type="button" aria-label="Предыдущие">‹</button>
               <button class="ctrl" id="carousel-next" type="button" aria-label="Следующие">›</button>
@@ -55,11 +59,10 @@
     </main>
 
     <footer class="site-footer container">
-      <div class="footer-left">
+      <div class="footer-content">
         <span id="copyright"></span>
-      </div>
-      <div class="footer-right">
-        <a href="tel:+79990000000" class="link">Поддержка: +7 (999) 000-00-00</a>
+        <span class="separator">|</span>
+        <a href="https://forms.gle/your-form-link" target="_blank" rel="noopener" class="link">Поддержка: составить заявку</a>
       </div>
     </footer>
   </body>

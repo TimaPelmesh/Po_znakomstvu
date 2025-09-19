@@ -19,10 +19,13 @@
 
   function setDailyDateLabel() {
     const el = document.getElementById(DAILY_DATE_ID);
-    if (!el) return;
+    const elContent = document.getElementById("daily-date-content");
+    if (!el && !elContent) return;
     const d = new Date();
     const dateStr = d.toLocaleDateString("ru-RU", { day: "2-digit", month: "long" });
-    el.textContent = `Обновляется ежедневно · ${dateStr}`;
+    const text = `Обновляется ежедневно · ${dateStr}`;
+    if (el) el.textContent = text;
+    if (elContent) elContent.textContent = text;
   }
 
   async function initialize() {
