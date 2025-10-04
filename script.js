@@ -1,15 +1,18 @@
 (function () {
-  const ARTICLES_CONTAINER_ID = "articles";
+  const DAILY_ARTICLES_CONTAINER_ID = "daily-articles";
+  const FILTERED_ARTICLES_CONTAINER_ID = "filtered-articles";
+  const FILTER_RESULTS_ID = "filter-results";
   const TOPICS_CONTAINER_ID = "topics";
   const DAILY_DATE_ID = "daily-date";
   const COPYRIGHT_ID = "copyright";
-  const DAILY_COUNT_DEFAULT = 6;
+  const DAILY_COUNT_DEFAULT = 3;
   const CAROUSEL_STEP_PCT = 0.92; // move roughly one card on mobile
 
   document.addEventListener("DOMContentLoaded", () => {
     setCopyright();
     setDailyDateLabel();
     initialize();
+    setupThemeToggle();
   });
 
   function setCopyright() {
@@ -36,14 +39,21 @@
 
       renderTopics(data.topics, topicParam);
 
-      const filtered = topicParam
-        ? data.articles.filter(a => (a.topics || []).map(normalize).includes(normalize(topicParam)))
-        : data.articles;
-
-      const dailyCount = Math.min(DAILY_COUNT_DEFAULT, filtered.length);
-      const daily = selectDeterministicDaily(filtered, dailyCount);
-      renderArticles(daily);
-      setupCarouselControls();
+      // Статьи дня (всегда случайные 3, не зависят от фильтра)
+      const dailyCount = Math.min(DAILY_COUNT_DEFAULT, data.articles.length);
+      const daily = selectDeterministicDaily(data.articles, dailyCount);
+      renderArticles(daily, DAILY_ARTICLES_CONTAINER_ID);
+      
+      // Показать результаты фильтрации если есть фильтр
+      if (topicParam) {
+        const filtered = topicParam === "all"
+          ? data.articles
+          : data.articles.filter(a => (a.topics || []).map(normalize).includes(normalize(topicParam)));
+        
+        showFilterResults(filtered);
+      } else {
+        hideFilterResults();
+      }
     } catch (err) {
       console.error(err);
       renderError("Не удалось загрузить данные. Проверьте файл data.json.");
@@ -77,9 +87,10 @@
       return a;
     };
 
-    // Show topics first; place "Все" at the end
+    // Show "Темы дня" first, then topics, then "Все"
+    wrap.appendChild(makeLink("Темы дня", ""));
     topics.forEach(t => wrap.appendChild(makeLink(t, t)));
-    wrap.appendChild(makeLink("Все", ""));
+    wrap.appendChild(makeLink("Все", "all"));
   }
 
   function withParam(pathname, key, value) {
@@ -89,8 +100,8 @@
     return `${pathname}?${params.toString()}`;
   }
 
-  function renderArticles(items) {
-    const wrap = document.getElementById(ARTICLES_CONTAINER_ID);
+  function renderArticles(items, containerId) {
+    const wrap = document.getElementById(containerId);
     if (!wrap) return;
     wrap.innerHTML = "";
     if (!items.length) {
@@ -250,6 +261,39 @@
       t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
+  }
+
+  function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    if (!themeToggle) return;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+
+  function showFilterResults(articles) {
+    const filterResults = document.getElementById(FILTER_RESULTS_ID);
+    if (filterResults) {
+      filterResults.style.display = 'block';
+    }
+    renderArticles(articles, FILTERED_ARTICLES_CONTAINER_ID);
+  }
+
+  function hideFilterResults() {
+    const filterResults = document.getElementById(FILTER_RESULTS_ID);
+    if (filterResults) {
+      filterResults.style.display = 'none';
+    }
   }
 })();
 

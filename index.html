@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <meta name="description" content="😎💼 Деловые Знакомства — бот для поиска деловых контактов. Найдите партнеров, клиентов и единомышленников! 🚀" />
-    <title>@business_dating_bot — Знакомства, которые работают на тебя</title>
+    <meta name="description" content="💕 Деловые Знакомства — платформа для поиска деловых и личных контактов. Психология, отношения, саморазвитие и многое другое! 🌟" />
+    <title>Деловые Знакомства — Психология, отношения, саморазвитие</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,44 +16,72 @@
   <body>
     <header class="site-header container">
       <a class="brand" href="/">
-        <img class="brand-logo" src="image.jpg" alt="Логотип @business_dating_bot" />
-        <span class="brand-name">@business_dating_bot</span>
+        <img class="brand-logo" src="image.jpg" alt="Логотип Деловые Знакомства" />
+        <span class="brand-name">Деловые Знакомства</span>
       </a>
       <nav class="nav">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+          <div class="theme-icon-container">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </button>
         <a class="btn btn-primary" id="open-bot" href="https://t.me/business_dating_bot" target="_blank" rel="noopener">Открыть бота</a>
       </nav>
     </header>
 
     <main>
       <section class="hero container">
-        <h1 class="hero-title">По знакомству</h1>
-        <p class="hero-subtitle">Знакомства, которые работают на тебя</p>
+        <h1 class="hero-title">Деловые Знакомства</h1>
+        <p class="hero-subtitle">Психология, отношения, саморазвитие и многое другое</p>
       </section>
 
-      <section class="daily container">
-        <div class="daily-head">
-          <h2 class="section-title">Темы дня</h2>
-          <div class="daily-meta" id="daily-date"></div>
-        </div>
+      <section class="main-content container">
         <div class="layout">
-          <aside class="sidebar" aria-labelledby="topics-title">
-            <h2 id="topics-title" class="section-title">Темы</h2>
-            <div class="daily-button-wrap">
-              <a class="topic-link topic-daily" href="/">Темы дня</a>
-            </div>
-            <div id="topics" class="topics-list topics-vertical"></div>
-          </aside>
           <div class="content">
-            <div class="content-head">
-              <h2 class="section-title">Темы дня</h2>
-              <div class="daily-meta" id="daily-date-content"></div>
+            <!-- Бот секция - теперь в самом верху -->
+            <div class="bot-section">
+              <a class="btn-bot" href="https://t.me/business_dating_bot" target="_blank" rel="noopener">
+                <div class="btn-bot-content">
+                  <div class="btn-bot-text">
+                    <span class="btn-bot-title">Начать знакомства</span>
+                    <span class="btn-bot-subtitle">Присоединяйтесь к нашему сообществу</span>
+                  </div>
+                  <div class="btn-bot-arrow">→</div>
+                </div>
+              </a>
             </div>
-            <div class="carousel-controls" aria-hidden="true">
-              <button class="ctrl" id="carousel-prev" type="button" aria-label="Предыдущие">‹</button>
-              <button class="ctrl" id="carousel-next" type="button" aria-label="Следующие">›</button>
+
+            <!-- Статьи дня (рандомные 3) -->
+            <div class="articles-section">
+              <h2 class="section-title">Статьи дня</h2>
+              <div class="daily-meta" id="daily-date"></div>
+              <div id="daily-articles" class="grid"></div>
             </div>
-            <div id="articles" class="grid"></div>
+            
+            <!-- Результаты фильтрации -->
+            <div class="articles-section" id="filter-results" style="display: none;">
+              <h2 class="section-title">Результаты поиска</h2>
+              <div id="filtered-articles" class="grid"></div>
+            </div>
           </div>
+          
+          <!-- Боковая панель с темами -->
+          <aside class="sidebar" aria-labelledby="topics-title">
+            <h2 id="topics-title" class="section-title">Фильтр по темам</h2>
+            <div id="topics" class="topics-list topics-vertical"></div>
+            
+            <!-- Дополнительная информация -->
+            <div class="sidebar-info">
+              <h3 class="info-title">О проекте</h3>
+              <p class="info-text">Деловые знакомства - это платформа для поиска единомышленников, партнеров и друзей. Присоединяйтесь к нашему сообществу!</p>
+            </div>
+          </aside>
         </div>
       </section>
     </main>
