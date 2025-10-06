@@ -10,13 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="image.jpg">
+    
     <script defer src="script.js"></script>
   </head>
   <body>
     <header class="site-header container">
       <a class="brand" href="/">
-        <img class="brand-logo" src="image.jpg" alt="Логотип Деловые Знакомства" />
         <span class="brand-name">Деловые Знакомства</span>
       </a>
       <nav class="nav">
@@ -43,6 +42,12 @@
 
       <section class="main-content container">
         <div class="layout">
+          <!-- Левая боковая панель: полный список статей -->
+          <aside class="sidebar-left" aria-labelledby="all-articles-title">
+            <h2 id="all-articles-title" class="section-title">Наши статьи</h2>
+            <div id="all-articles-list" class="all-articles-list"></div>
+          </aside>
+
           <div class="content">
             <!-- Бот секция - теперь в самом верху -->
             <div class="bot-section">
@@ -64,14 +69,10 @@
               <div id="daily-articles" class="grid"></div>
             </div>
             
-            <!-- Результаты фильтрации -->
-            <div class="articles-section" id="filter-results" style="display: none;">
-              <h2 class="section-title">Результаты поиска</h2>
-              <div id="filtered-articles" class="grid"></div>
-            </div>
+            
           </div>
           
-          <!-- Боковая панель с темами -->
+          <!-- Правая боковая панель с темами -->
           <aside class="sidebar" aria-labelledby="topics-title">
             <h2 id="topics-title" class="section-title">Фильтр по темам</h2>
             <div id="topics" class="topics-list topics-vertical"></div>

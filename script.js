@@ -3,6 +3,7 @@
   const FILTERED_ARTICLES_CONTAINER_ID = "filtered-articles";
   const FILTER_RESULTS_ID = "filter-results";
   const TOPICS_CONTAINER_ID = "topics";
+  const ALL_ARTICLES_LIST_ID = "all-articles-list"; // контейнер для полного списка статей слева
   const DAILY_DATE_ID = "daily-date";
   const COPYRIGHT_ID = "copyright";
   const DAILY_COUNT_DEFAULT = 3;
@@ -37,20 +38,23 @@
       const urlParams = new URLSearchParams(window.location.search);
       const topicParam = urlParams.get("topic");
 
+      // Правый сайдбар: темы (без кнопки «Все»)
       renderTopics(data.topics, topicParam);
+
+      // Левый сайдбар: полный список статей (алфавитно)
+      renderArticlesLeft(data.articles);
 
       // Статьи дня (всегда случайные 3, не зависят от фильтра)
       const dailyCount = Math.min(DAILY_COUNT_DEFAULT, data.articles.length);
       const daily = selectDeterministicDaily(data.articles, dailyCount);
       renderArticles(daily, DAILY_ARTICLES_CONTAINER_ID);
-      
-      // Показать результаты фильтрации если есть фильтр
+
+      // Фильтр по выбранной теме
       if (topicParam) {
-        const filtered = topicParam === "all"
-          ? data.articles
-          : data.articles.filter(a => (a.topics || []).map(normalize).includes(normalize(topicParam)));
-        
-        showFilterResults(filtered);
+        const items = data.articles.filter(a =>
+          (a.topics || []).some(t => normalize(t) === normalize(topicParam))
+        );
+        showFilterResults(items, topicParam);
       } else {
         hideFilterResults();
       }
@@ -80,17 +84,32 @@
       a.className = "topic-link";
       a.textContent = label;
       a.href = topicValue ? withParam(window.location.pathname, "topic", topicValue) : window.location.pathname;
-      if (active && normalize(active) === normalize(topicValue)) {
-        a.style.borderColor = "var(--accent)";
-        a.style.color = "var(--accent)";
-      }
+      const isActive = active ? normalize(active) === normalize(topicValue) : topicValue === "";
+      if (isActive) a.classList.add("active");
       return a;
     };
 
-    // Show "Темы дня" first, then topics, then "Все"
+    // Show "Темы дня" first, then topics (без кнопки "Все")
     wrap.appendChild(makeLink("Темы дня", ""));
     topics.forEach(t => wrap.appendChild(makeLink(t, t)));
-    wrap.appendChild(makeLink("Все", "all"));
+  }
+
+  function renderArticlesLeft(articles) {
+    const wrap = document.getElementById(ALL_ARTICLES_LIST_ID);
+    if (!wrap) return;
+    wrap.innerHTML = "";
+
+    const sorted = articles.slice().sort((a, b) => String(a.title).localeCompare(String(b.title), 'ru'));
+
+    sorted.forEach((article) => {
+      const a = document.createElement("a");
+      a.className = "topic-link"; // используем стиль чипсов
+      a.textContent = article.title;
+      a.href = article.url || "#";
+      a.target = article.url ? "_blank" : "_self";
+      a.rel = article.url ? "noopener" : "";
+      wrap.appendChild(a);
+    });
   }
 
   function withParam(pathname, key, value) {
@@ -281,18 +300,43 @@
     });
   }
 
-  function showFilterResults(articles) {
-    const filterResults = document.getElementById(FILTER_RESULTS_ID);
-    if (filterResults) {
-      filterResults.style.display = 'block';
-    }
+  function ensureFilterResultsContainer() {
+    let wrap = document.getElementById(FILTER_RESULTS_ID);
+    if (wrap) return wrap;
+    const content = document.querySelector('.content');
+    if (!content) return null;
+    wrap = document.createElement('section');
+    wrap.id = FILTER_RESULTS_ID;
+    const title = document.createElement('h2');
+    title.className = 'section-title';
+    title.textContent = 'Результаты поиска';
+    const grid = document.createElement('div');
+    grid.id = FILTERED_ARTICLES_CONTAINER_ID;
+    grid.className = 'grid';
+    wrap.appendChild(title);
+    wrap.appendChild(grid);
+    content.appendChild(wrap);
+    return wrap;
+  }
+
+  function showFilterResults(articles, topic) {
+    const wrap = ensureFilterResultsContainer();
+    if (!wrap) return;
+    // Обновим заголовок с выбранной темой
+    const title = wrap.querySelector('.section-title');
+    if (title) title.textContent = 'Результаты поиска';
     renderArticles(articles, FILTERED_ARTICLES_CONTAINER_ID);
   }
 
   function hideFilterResults() {
     const filterResults = document.getElementById(FILTER_RESULTS_ID);
-    if (filterResults) {
-      filterResults.style.display = 'none';
+    if (filterResults) filterResults.remove();
+    const filteredArticles = document.getElementById(FILTERED_ARTICLES_CONTAINER_ID);
+    if (filteredArticles) {
+      filteredArticles.innerHTML = '';
+      // если обернут в секцию результатов, уберем и ее
+      const parent = filteredArticles.closest(`#${FILTER_RESULTS_ID}`);
+      if (parent) parent.remove();
     }
   }
 })();
