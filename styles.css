@@ -120,15 +120,17 @@ body::before { content: none; }
 
 /* Override global dark .topic-link for left list */
 [data-theme="dark"] .sidebar-left .topic-link {
-  background: rgba(255, 255, 255, 0.04) !important;
-  color: #cbd5e1 !important;
-  border-color: #2d2d44 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #e2e8f0 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 [data-theme="dark"] .sidebar-left .topic-link:hover {
-  background: rgba(74, 158, 255, 0.12) !important;
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
   color: #ffffff !important;
-  border-color: #4a9eff !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(74, 158, 255, 0.25) !important;
 }
 
 /* Dark theme bot button fixes */
@@ -296,6 +298,19 @@ body::before { content: none; }
   color: #d97706;
 }
 
+/* Dark theme for secondary button */
+[data-theme="dark"] .btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: #4a9eff;
+  color: #fff;
+  border-color: #4a9eff;
+}
+
 /* Анимация лучей солнца */
 .theme-icon-sun path:not(:first-child) {
   stroke-dasharray: 2;
@@ -353,6 +368,24 @@ body::before { content: none; }
 .btn-primary:hover { opacity: .9; }
 .btn-primary:active { transform: translateY(1px); }
 .btn-primary:focus { outline: none; box-shadow: 0 0 0 2px rgba(17,24,39,.15); }
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  box-shadow: none;
+  transition: all .15s ease;
+}
+.btn-secondary:hover { 
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-secondary:active { transform: translateY(1px); }
+.btn-secondary:focus { outline: none; box-shadow: 0 0 0 2px rgba(43,119,255,.15); }
 
 .hero { padding: 28px 0 4px; text-align: center; }
 
@@ -451,26 +484,80 @@ body::before { content: none; }
 /* Make article chips fill left sidebar width and truncate nicely */
 .sidebar-left .topic-link {
   width: 100%;
-  min-height: 56px;
-  padding: 12px 14px;
-  font-size: 16px;
-  line-height: 1.35;
+  min-height: 60px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.5;
   white-space: normal;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: none;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(30, 44, 86, 0.06);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .sidebar-left .topic-link:hover {
-  background: rgba(43, 119, 255, 0.06);
-  border-color: var(--accent);
-  transform: none;
+  background: linear-gradient(135deg, rgba(43, 119, 255, 0.08) 0%, rgba(122, 92, 255, 0.08) 100%);
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(43, 119, 255, 0.15);
+}
+
+/* Special handling for very long article titles */
+.sidebar-left .topic-link[title*="ключей"],
+.sidebar-left .topic-link[title*="РОСКОШЬ"],
+.sidebar-left .topic-link[title*="ВАРИАНТ"] {
+  min-height: 80px;
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.sidebar-left .topic-link[title*="ключей"]:hover,
+.sidebar-left .topic-link[title*="РОСКОШЬ"]:hover,
+.sidebar-left .topic-link[title*="ВАРИАНТ"]:hover {
+  min-height: 80px;
+}
+
+/* General handling for long titles (more than 50 characters) */
+.sidebar-left .topic-link {
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.expand-button {
+  background: linear-gradient(135deg, rgba(43, 119, 255, 0.1) 0%, rgba(122, 92, 255, 0.1) 100%) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.expand-button:hover {
+  background: linear-gradient(135deg, rgba(43, 119, 255, 0.15) 0%, rgba(122, 92, 255, 0.15) 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 18px rgba(43, 119, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .expand-button {
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
+  border-color: #4a9eff !important;
+  color: #4a9eff !important;
+}
+
+[data-theme="dark"] .expand-button:hover {
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%) !important;
+  box-shadow: 0 8px 18px rgba(74, 158, 255, 0.3) !important;
 }
 
 .sidebar-info {
@@ -596,6 +683,7 @@ body::before { content: none; }
   font-weight: 400;
 }
 
+
 .btn-bot-arrow {
   font-size: 24px;
   color: white;
@@ -655,12 +743,12 @@ body::before { content: none; }
 .grid .card:nth-child(3n + 1) { border-color: #000000; }
 .grid .card:nth-child(3n + 2) { border-color: #ffffff; }
 .grid .card:nth-child(3n + 2) { background-clip: padding-box; }
-.grid .card:nth-child(3n + 3) { border-color: #e11d2e; }
+.grid .card:nth-child(3n + 3) { border-color: #dc2626; }
 
 /* Ensure contrast in dark theme while keeping white frame available */
 [data-theme="dark"] .grid .card:nth-child(3n + 2) { border-color: #ffffff; }
 [data-theme="dark"] .grid .card:nth-child(3n + 1) { border-color: #000000; }
-[data-theme="dark"] .grid .card:nth-child(3n + 3) { border-color: #ef4444; }
+[data-theme="dark"] .grid .card:nth-child(3n + 3) { border-color: #dc2626; }
 
 .card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag {
@@ -687,6 +775,7 @@ body::before { content: none; }
   font-size: 14px;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* 2-3 строки превью */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -842,19 +931,25 @@ body::before { content: none; }
   }
   
   .container {
-    padding: 0 24px;
+    padding: 0 16px;
   }
   
   .site-header {
     padding: 18px 0;
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .brand {
-    margin-left: 2px;
+    margin-left: 0;
+    text-align: center;
+    flex: 1;
+    justify-content: center;
   }
   
   .nav {
-    margin-right: 8px;
+    margin-right: 0;
+    gap: 8px;
   }
   .brand-logo {
     width: 26px;

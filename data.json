@@ -11,121 +11,121 @@
     {
       "title": "Техника разведчика от тревоги",
       "excerpt": "Практические методы управления тревожностью и стрессом в повседневной жизни.",
-      "url": "https://example.com/scout-technique-anxiety",
+      "url": "article-1.html",
       "topics": ["Психология", "Саморазвитие"]
     },
     {
       "title": "Как выбрать арбуз любимой девушке",
       "excerpt": "Секреты выбора идеального арбуза и романтические жесты.",
-      "url": "https://example.com/watermelon-selection",
+      "url": "article-2.html",
       "topics": ["Отношения", "Питание"]
     },
     {
       "title": "Выгодное партнерство на основе нейромедиаторов",
       "excerpt": "Как использовать знания о мозге для построения успешных деловых отношений.",
-      "url": "https://example.com/neurotransmitter-partnership",
+      "url": "article-3.html",
       "topics": ["Бизнес", "Психология"]
     },
     {
       "title": "Соционика - ключ к поиску своих",
       "excerpt": "Как соционические типы помогают найти единомышленников и партнеров.",
-      "url": "https://example.com/socionics-find-people",
+      "url": "article-4.html",
       "topics": ["Соционика", "Отношения"]
     },
     {
       "title": "Как обманывают доверие?",
       "excerpt": "Психологические механизмы манипуляций и как их распознать.",
-      "url": "https://example.com/trust-deception",
+      "url": "article-5.html",
       "topics": ["Психология", "Общение"]
     },
     {
       "title": "Как влюбить в себя кого угодно?",
       "excerpt": "Психологические принципы привлечения внимания и симпатии.",
-      "url": "https://example.com/attract-anyone",
+      "url": "article-6.html",
       "topics": ["Отношения", "Психология"]
     },
     {
       "title": "Эмоциональные потребности",
       "excerpt": "Понимание и удовлетворение эмоциональных потребностей в отношениях.",
-      "url": "https://example.com/emotional-needs",
+      "url": "article-7.html",
       "topics": ["Психология", "Отношения"]
     },
     {
       "title": "Специи для гурманов",
       "excerpt": "Искусство использования специй для создания изысканных блюд.",
-      "url": "https://example.com/gourmet-spices",
+      "url": "article-8.html",
       "topics": ["Питание"]
     },
     {
       "title": "Полезное питание",
       "excerpt": "Принципы здорового питания для поддержания энергии и красоты.",
-      "url": "https://example.com/healthy-nutrition",
+      "url": "article-9.html",
       "topics": ["Питание", "Саморазвитие"]
     },
     {
-      "title": "Как привлечь богатство",
+      "title": "Как привлечь богатство (одобрено)",
       "excerpt": "Психология изобилия и практические шаги к финансовому успеху.",
-      "url": "https://example.com/attract-wealth",
+      "url": "article-10.html",
       "topics": ["Бизнес", "Саморазвитие"]
     },
     {
       "title": "Как сделать так, чтобы вас боялись и уважали?",
       "excerpt": "Развитие харизмы и авторитета в личных и деловых отношениях.",
-      "url": "https://example.com/respect-and-fear",
+      "url": "article-11.html",
       "topics": ["Личность", "Общение"]
     },
     {
       "title": "Как воздействовать и добиваться своего?",
       "excerpt": "Этические методы влияния и достижения целей в общении.",
-      "url": "https://example.com/influence-and-achieve",
+      "url": "article-12.html",
       "topics": ["Психология", "Общение"]
     },
     {
       "title": "Кто ты? Трамп или Байден?",
       "excerpt": "Анализ лидерских качеств и стилей управления в современном мире.",
-      "url": "https://example.com/trump-or-biden",
+      "url": "article-13.html",
       "topics": ["Личность", "Бизнес"]
     },
     {
       "title": "Красота уходит с молодостью",
       "excerpt": "Как сохранить привлекательность и уверенность в себе с возрастом.",
-      "url": "https://example.com/beauty-and-age",
+      "url": "article-14.html",
       "topics": ["Красота", "Саморазвитие"]
     },
     {
       "title": "Ум приходит с рождения",
       "excerpt": "Развитие интеллекта и когнитивных способностей на протяжении жизни.",
-      "url": "https://example.com/intelligence-from-birth",
+      "url": "article-15.html",
       "topics": ["Саморазвитие", "Психология"]
     },
     {
       "title": "Правила женщины, которая получает все",
       "excerpt": "Принципы успешной женщины в современном мире.",
-      "url": "https://example.com/successful-woman-rules",
+      "url": "article-16.html",
       "topics": ["Личность", "Саморазвитие"]
     },
     {
-      "title": "5 ключей в общении, чтобы вас видели как РОСКОШЬ",
+      "title": "5 ключей в общении, чтобы вас видели как РОСКОШЬ, а не как ВАРИАНТ / секреты всех уверенных женщин",
       "excerpt": "Секреты уверенного общения, которые создают впечатление ценности.",
-      "url": "https://example.com/communication-luxury",
+      "url": "article-17.html",
       "topics": ["Общение", "Личность"]
     },
     {
       "title": "Как быстро распознать психопата",
       "excerpt": "Признаки психопатии и способы защиты от токсичных людей.",
-      "url": "https://example.com/recognize-psychopath",
+      "url": "article-18.html",
       "topics": ["Психология", "Общение"]
     },
     {
       "title": "Как проверить совместимость в любви?",
       "excerpt": "Методы определения совместимости в романтических отношениях.",
-      "url": "https://example.com/love-compatibility",
+      "url": "article-19.html",
       "topics": ["Совместимость", "Отношения"]
     },
     {
       "title": "Как понять, что это «твой» человек",
       "excerpt": "Признаки идеального партнера и как их распознать.",
-      "url": "https://example.com/recognize-right-person",
+      "url": "article-20.html",
       "topics": ["Совместимость", "Отношения"]
     }
   ]

@@ -6,7 +6,7 @@
   const ALL_ARTICLES_LIST_ID = "all-articles-list"; // контейнер для полного списка статей слева
   const DAILY_DATE_ID = "daily-date";
   const COPYRIGHT_ID = "copyright";
-  const DAILY_COUNT_DEFAULT = 3;
+  const DAILY_COUNT_DEFAULT = 6;
   const CAROUSEL_STEP_PCT = 0.92; // move roughly one card on mobile
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -100,16 +100,55 @@
     wrap.innerHTML = "";
 
     const sorted = articles.slice().sort((a, b) => String(a.title).localeCompare(String(b.title), 'ru'));
-
-    sorted.forEach((article) => {
+    
+    // Показываем только первые 10 статей
+    const visibleArticles = sorted.slice(0, 10);
+    const hiddenArticles = sorted.slice(10);
+    
+    // Рендерим видимые статьи
+    visibleArticles.forEach((article) => {
       const a = document.createElement("a");
-      a.className = "topic-link"; // используем стиль чипсов
+      a.className = "topic-link";
       a.textContent = article.title;
+      a.title = article.title; // Добавляем title для CSS селектора
       a.href = article.url || "#";
       a.target = article.url ? "_blank" : "_self";
       a.rel = article.url ? "noopener" : "";
       wrap.appendChild(a);
     });
+    
+    // Если есть скрытые статьи, добавляем кнопку "Показать все"
+    if (hiddenArticles.length > 0) {
+      const expandButton = document.createElement("button");
+      expandButton.className = "topic-link expand-button";
+      expandButton.innerHTML = "Показать все статьи ↓";
+      expandButton.onclick = () => toggleAllArticles(wrap, hiddenArticles, expandButton);
+      wrap.appendChild(expandButton);
+    }
+  }
+  
+  function toggleAllArticles(container, hiddenArticles, button) {
+    const isExpanded = button.textContent.includes("Скрыть");
+    
+    if (isExpanded) {
+      // Скрываем дополнительные статьи
+      const additionalArticles = container.querySelectorAll('.additional-article');
+      additionalArticles.forEach(article => article.remove());
+      button.innerHTML = "Показать все статьи ↓";
+    } else {
+      // Показываем все статьи
+      hiddenArticles.forEach((article) => {
+        const a = document.createElement("a");
+        a.className = "topic-link additional-article";
+        a.textContent = article.title;
+        a.title = article.title; // Добавляем title для CSS селектора
+        a.href = article.url || "#";
+        a.target = article.url ? "_blank" : "_self";
+        a.rel = article.url ? "noopener" : "";
+        container.insertBefore(a, button);
+      });
+      button.innerHTML = "Скрыть дополнительные статьи ↑";
+    }
   }
 
   function withParam(pathname, key, value) {
